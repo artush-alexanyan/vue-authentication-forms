@@ -4,15 +4,25 @@ import  'firebase/auth'
 export default {
   data: () => {
     return {
+        inputProps: [
+          { id: 0, placeholder: 'Enter email', type: 'email', value: '' },
+          { id: 1, placeholder: 'Enter password', type: 'password', value: '' },
+        ],
         info: null,
         loading: false,
-        error: null,
-        user: {
-          email: '',
-          password: ''
-      }     
+        error: null,    
     }
   },
+
+  computed: {
+    getEmailValue () {
+      return this.inputProps[0].value
+    },
+    getPasswordValue () {
+      return this.inputProps[1].value
+    }    
+  },
+
   methods: {
     getCurrensy () {
       axios

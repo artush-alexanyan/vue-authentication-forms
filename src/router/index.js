@@ -37,7 +37,12 @@ Vue.use(VueRouter)
     path: '*',
     name: 'ErrorPage',
     component: () => import(/* webpackChunkName: "error" */ '../components/ErrorPage.vue')
-  }
+  },
+  {
+    path: '/test',
+    name: 'Test',
+    component: () => import(/* webpackChunkName: "test" */ '../components/testingBaseInput.vue')
+  }  
 ]
   
 const router = new VueRouter({

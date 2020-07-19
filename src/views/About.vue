@@ -13,10 +13,12 @@
        <h6 class="text-center mt-3">Type my name to see about me</h6>
         <div class="d-flex justify-content-center">
            
-            <simpleInput  
+            <baseInput  
                 v-model="myName"
-            
-                />             
+                type="text"
+                placeholder="Type in english please"
+                
+            />                  
         </div>  
 
         <div v-show="showAboutMe">
@@ -26,10 +28,12 @@
       <h6 class="text-center mt-3">Type your name to see about you</h6>
           <div class="d-flex justify-content-center">
               
-              <simpleInput  
-                  v-model="yourName"
-                  
-                  />             
+            <baseInput  
+                v-model="yourName"
+                type="text"
+                placeholder="Type in english please"
+                
+            />               
           </div>  
 
           <div v-if="showAboutYou">
@@ -40,11 +44,11 @@
 </template>
 
 <script>
-import simpleInput from '../components/base/simpleInput.vue'
+import baseInput from '../components/base/baseInput.vue'
 export default {
     name: 'About',
     components: {
-        simpleInput,
+        baseInput,
     },
     data: () => {
         return {

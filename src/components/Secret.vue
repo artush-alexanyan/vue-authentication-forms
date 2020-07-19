@@ -11,32 +11,45 @@
 
        </h4>
        <h5 class="text-center">Type your first name</h5>
-        <div class="d-flex justify-content-center">
-           
-            <simpleInput  
+        <div class="d-flex justify-content-center">   
+
+            <baseInput  
                 v-model="ragazza.il_nome"
-            
-                />             
+                type="text"
+                placeholder="Type in english please"
+                
+            />      
+
         </div>  
 
       <h5 class="text-center mt-3">Type your last name</h5>
         <div class="d-flex justify-content-center">
              
-            <simpleInput  
+            <baseInput  
                 v-model="ragazza.patronimico"
+                type="text"
+                placeholder="Type in english please"
                 
-                />             
+            />              
         </div>      
 
         <div class="mt-5" v-if="showHidenItem">
             <div class="container">
                 <ul class="list-group">
+                    <p  class="text-center text-warning">
+                        <strong>
+                            Աքրոստիկոս
+                        </strong>
+                    </p>
                     <li 
                         v-for="line in akrostikos"
                         :key="line.id"
                         class="list-group-item list-group-item-warning mt-1"
                     >
-                    {{ line }}
+                        <strong style="color: red;">
+                            {{ line.start }}
+                        </strong>
+                            {{ line.end }}
                     </li>
                 </ul>            
             </div>                                    
@@ -46,13 +59,13 @@
 </template>
 
 <script>
-import simpleInput from '../components/base/simpleInput.vue'
+import baseInput from '../components/base/baseInput.vue'
 import baseSignOut from '../components/base/baseSignOut.vue'
 export default {
     name: 'Secret',
     components: {
-        simpleInput,
-        baseSignOut
+        baseSignOut,
+        baseInput
     },
     data: () => {
         return {
@@ -61,11 +74,11 @@ export default {
                 patronimico: '',
             },
             akrostikos: [
-                'Լույսով աչերիդ՛ արևն ամպի տակ',
-                'Իրիկնամուտի կտավ է հյուսել,',
-                'Լույում աչքերիդ անծիր-անհատակ',
-                'Ինչքան հմայք ու սեր ես թաքցրել․․․',
-                'Թող միշտ ճառագի լույսը սրտիդ մեջ:)'
+                { start: 'Լ', end: 'ույսով աչերիդ՛ արևն ամպի տակ' },
+                { start: 'Ի', end:'րիկնամուտի կտավ է հյուսել,' },
+                { start: 'Լ', end:'ույսում աչքերիդ անծիր-անհատակ' },
+                { start: 'Ի', end: 'նչքան հմայք ու սեր ես թաքցրել․․․' },
+                { start: 'Թ', end:'ող միշտ ճառագի լույսը սրտիդ մեջ:)' }
             ],            
             isVisible: false
         }

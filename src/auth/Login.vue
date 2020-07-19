@@ -16,24 +16,30 @@
                 <h4 class="text-center font-weight-bold mt-1"> Login </h4>
                 <p class="text-center text-info">Please login/register to continue;)</p>
                 <label for="InputEmail1">Email Address</label>
-                <baseEmailInput 
-                   v-model="user.email"
-                />
-                </div>
-                <div class="form-group">
-                <label for="InputPassword1">Password</label>
-                <basePasswordInput
-                   v-model="user.password"    
-                />
-                </div>
 
-                <button type="submit" 
-                    class="btn btn-primary btn-block" 
-                    @click="onLogin"
-                    >Login
-                </button>
+                <baseInput
+                   v-for="input in inputProps"
+                   v-model="input.value"
+                   :key="input.id" 
+                   :placeholder="input.placeholder"
+                   :type='input.type'
+                />
 
-                <div class="error mt-1" v-if="error != null"> <strong>{{ error }}!</strong> </div>
+                </div>
+    
+                <base-button
+                   :onClick="onLogin" 
+                >
+                   Login
+                </base-button>
+
+                <div 
+                    class="error mt-1" 
+                    v-if="error != null"
+                    > 
+                    <strong>{{ error }}!</strong>
+                </div>
+                
                 <div class="form-footer">
                 <p> Don't have an account? 
                     <router-link to="/register"
@@ -49,8 +55,8 @@
 </template>
 
 <script>
-import baseEmailInput from '../components/base/baseEmailInput.vue'
-import basePasswordInput from '../components/base/basePasswordInput.vue'
+import baseInput from '../components/base/baseInput.vue'
+import baseButton from '../components/base/baseButton.vue'
 import baseLoader from '../components/base/baseLoader.vue'
 import Auth from '../mixins/Auth.js'
 import firebase from 'firebase'
@@ -58,15 +64,15 @@ export default {
     name: 'Login',
     mixins: [ Auth],
     components: {
-        baseEmailInput,
-        basePasswordInput,
-        baseLoader
+        baseInput,
+        baseLoader,
+        baseButton
     },
     methods: {
         onLogin () {
             this.loading = true
             firebase
-                .auth().signInWithEmailAndPassword(this.user.email, this.user.password)
+                .auth().signInWithEmailAndPassword(this.getEmailValue, this.getPasswordValue)
                     .then( (user) => {
                         console.log(user)
                         this.$router.push({ path: '/home' })
